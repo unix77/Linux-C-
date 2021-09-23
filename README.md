@@ -1,1 +1,1 @@
-# Here I wll include some test code written in C, oriented to the Debian operating system.
+# Here I will include some test code written in C, for the Unix operating system.
