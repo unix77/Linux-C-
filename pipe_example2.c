@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <unistd.h> //para trabajar con procesos
+#include <unistd.h> //processes.h
 #include <time.h>
 #include <sys/wait.h>
-#include <errno.h> //para usar en el bucle capturador de procesos hijo
+#include <errno.h> //to catch children 
 
-/*In this program we will sum the numbers of an array
- * 2 children processes  will sum the first n/2 elements, the paren will get their results, and sum them both*/
+/*In this program we will sum the numbers of an array. 2 children processes  will sum one half each, the parent will get their results, and sum them both*/
 
 int main(int argc, char* argv[]){
 	int arr[] = {1, 2, 3, 4, 1, 2, 7};
@@ -17,13 +16,13 @@ int main(int argc, char* argv[]){
 	int start, end, id1, id2;
 	int partialResult = 0;
 	
-	//we need a file descriptor to read  write from the first child to its parent
+	//we need a file descriptor to read  write from the first pipe
 	int fd1[2];
 	if(pipe(fd1) == -1){
 		printf("There was a mistake creating the first pipe\n");
 	}
 	
-	//we need a second file descriptor to read  write from the second child to its parent
+	//we need a second file descriptor to read  write from the second pipe
 	int fd2[2];
 	if(pipe(fd2) == -1){
 		printf("There was a mistake creating the second pipe\n");
